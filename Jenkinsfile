@@ -33,11 +33,17 @@ environment {
             }
         }
 
-        stage('Run Docker Container') {
-            steps {
-                sh 'docker run -d -p 3000:3000 --name jenkins-node-app jenkins-node-app'
-            }
-        }
+stage('Run Docker Container') {
+    steps {
+        sh '''
+            docker rm -f jenkins-node-app || true
+            docker run -d \
+                -p 3002:3000 \
+                --name jenkins-node-app \
+                jenkins-node-app
+        '''
+    }
+}
     }
 
     post {

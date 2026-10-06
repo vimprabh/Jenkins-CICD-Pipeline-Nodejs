@@ -6,8 +6,7 @@ pipeline {
     CONTAINER_NAME = 'node-jenkins-demo'
     APP_PORT = '3002'
 
-    PATH = "/opt/homebrew/bin:/usr/local/bin:/Applications/Docker.app/Contents/Resources/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-}
+    PATH = "/opt/homebrew/bin:${env.PATH}"
     stages {
         stage('Checkout') {
             steps {

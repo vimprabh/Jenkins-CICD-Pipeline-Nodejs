@@ -36,10 +36,23 @@ environment {
 stage('Run Docker Container') {
     steps {
         sh '''
-            docker rm -f jenkins-node-app || true
+            docker network create jenkins-network || true
+
+            docker rm -f mongodb || true
+
             docker run -d \
-                -p 3002:3000 \
+                --name mongodb \
+                --network jenkins-network \
+                mongo
+
+            docker rm -f jenkins-node-app || true
+
+            docker run -d \
                 --name jenkins-node-app \
+                --network jenkins-network \
+                -p 3002:3000 \
+                -e MONGO_HOST=mongodb \
+                -e MONGO_PORT=27017 \
                 jenkins-node-app
         '''
     }

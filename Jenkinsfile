@@ -7,6 +7,7 @@ pipeline {
     APP_PORT = '3002'
 
     PATH = "/opt/homebrew/bin:${env.PATH}"
+    }
     stages {
         stage('Checkout') {
             steps {

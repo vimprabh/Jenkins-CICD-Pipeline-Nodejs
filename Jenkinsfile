@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
-    environment {
+environment {
     DOCKER_IMAGE = 'vimprabh/node-jenkins-demo'
     CONTAINER_NAME = 'node-jenkins-demo'
     APP_PORT = '3002'
 
-    PATH = "/opt/homebrew/bin:${env.PATH}"
-    }
+    PATH = "/opt/homebrew/bin:/usr/local/bin:/Applications/Docker.app/Contents/Resources/bin:${env.HOME}/.docker/bin:${env.PATH}"
+}
     stages {
         stage('Checkout') {
             steps {
